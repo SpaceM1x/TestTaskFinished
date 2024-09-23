@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестовое Задание</title>
+</head>
+<body>
+<h1>Введите массив чисел разделенных запятыми</h1>
+<input type="text" id="numberArray" placeholder="Введите массив чисел">
+<button onclick="saveNumbers()">Save</button>
+
+
+<h2>Получить сортировку по ID</h2>
+<input type="number" id="arrayId" placeholder="Введите ID Сортировки">
+<button onclick="getArrayById()">Get Array</button>
+
+<h2>Сортированные числа:</h2>
+<p id="result"></p>
+
+
+<script>
+    function saveNumbers() {
+        const numbers = document.getElementById("numberArray").value.split(',').map(Number);
+        fetch('/start/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(numbers)
+        }).then(response => response.text())
+            .then(data => alert(data));
+    }
+
+    function getResult() {
+        fetch('/start/get-result')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").textContent = data.join(', ');
+            });
+    }
+
+    function getArrayById() {
+        const id = document.getElementById("arrayId").value;
+        fetch(`/start/get-result/${id}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Array not found');
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById("result").textContent = Array.isArray(data) ? data.join(', ') : 'No data';
+            })
+            .catch(error => {
+                document.getElementById("result").textContent = error.message;
+            });
+    }
+</script>
+</body>
+</html>
