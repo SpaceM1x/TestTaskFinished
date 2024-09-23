@@ -1,6 +1,6 @@
-package com.example.demo.Repository;
+package com.example.demo.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.demo.Entity.ArrayEntity;
+import com.example.demo.entity.ArrayEntity;
 public interface ArrayRep extends JpaRepository<ArrayEntity, Long> {
 
 }

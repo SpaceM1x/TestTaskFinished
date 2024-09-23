@@ -1,8 +1,8 @@
-package com.example.demo.Controller;
+package com.example.demo.controller;
 
-import com.example.demo.Service.SortService;
-import com.example.demo.Entity.ArrayEntity;
-import com.example.demo.Repository.ArrayRep;
+import com.example.demo.service.SortService;
+import com.example.demo.entity.ArrayEntity;
+import com.example.demo.repository.ArrayRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
